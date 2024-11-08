@@ -15,7 +15,7 @@ from .settings import RabiRibiSettings
 from .web import RabiRibiWeb
 
 def launch_client():
-    """Launch a rabi ribi client instance"""
+    """Launch a Rabi-Ribi client instance"""
     from worlds.rabi_ribi.client.client import launch
     launch_subprocess(launch, name="RabiRibiClient")
 
