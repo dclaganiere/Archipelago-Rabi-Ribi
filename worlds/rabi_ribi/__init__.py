@@ -45,7 +45,7 @@ class RabiRibiWorld(World):
 
     item_name_to_id: Dict[str, int] = {
         name: id_num for
-        id_num, name in enumerate(item_set, base_id)
+        id_num, name in enumerate(sorted(item_set), base_id)
     }
     item_name_to_id["Nothing"] = base_id + len(item_name_to_id)
     location_name_to_id: Dict[str, int] = {
