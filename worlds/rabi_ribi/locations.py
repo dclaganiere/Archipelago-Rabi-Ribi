@@ -330,47 +330,49 @@ western_coast_halloween_locations = {
 southern_woodland_table = {
     **southern_woodland_locations,
     **southern_woodland_egg_locations,
-    **southern_woodland_post_game_locations,
+    **southern_woodland_post_game_locations
 }
 
 western_coast_table = {
     **western_coast_locations,
     **western_coast_egg_locations,
     **western_coast_post_game_locations,
-    **western_coast_halloween_locations,
+    **western_coast_halloween_locations
 }
 
 island_core_table = {
     **island_core_locations,
-    **island_core_egg_locations,
+    **island_core_egg_locations
 }
 
 northern_tundra_table = {
     **northern_tundra_locations,
-    **northern_tundra_egg_locations,
+    **northern_tundra_egg_locations
 }
 
 eastern_highlands_table = {
     **eastern_highlands_locations,
-    **eastern_highlands_egg_locations,
+    **eastern_highlands_egg_locations
 }
 
 rabi_rabi_town_table = {
     **rabi_rabi_town_egg_locations,
+    **rabi_rabi_town_post_iris_locations
 }
 
 plurkwood_table = {
-    **plurkwood_egg_locations,
+    **plurkwood_egg_locations
 }
 
 subterranean_area_table = {
     **subterranean_area_locations,
     **subterranean_area_egg_locations,
-    **subterranean_area_post_game_locations,
+    **subterranean_area_post_game_locations
 }
 
 warp_destination_table = {
-    **warp_destination_egg_locations
+    **warp_destination_egg_locations,
+    **warp_destination_post_game_locations
 }
 
 system_interior_table = {
