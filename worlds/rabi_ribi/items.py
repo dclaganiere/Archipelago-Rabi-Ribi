@@ -17,7 +17,6 @@ class RabiRibiItem(Item):
     def __init__(self, name, classification: ItemClassification, code: Optional[int], player: int):
         super(RabiRibiItem, self).__init__(name, classification, code, player)
 
-
 class RabiRibiItemData(NamedTuple):
     code: Optional[int]
     classification: ItemClassification = ItemClassification.filler
