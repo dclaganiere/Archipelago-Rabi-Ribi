@@ -760,6 +760,10 @@
     "edge": "EVERNIGHT_LOWER -> RIVERBANK_LOWER_RIGHT",
     "prereq": "FIRE_ORB",
     }
+    {
+    "edge": "LAB_ENTRANCE -> EVERNIGHT_LOWER",
+    "prereq": "current & FIRE_ORB",
+    }
 ]}
 
 {
@@ -810,6 +814,10 @@
     {
     "edge": "EVERNIGHT_LOWER -> RIVERBANK_LOWER_RIGHT",
     "prereq": "PIKO_HAMMER | EXPLOSIVES",
+    }
+    {
+    "edge": "LAB_ENTRANCE -> EVERNIGHT_LOWER",
+    "prereq": "current & (PIKO_HAMMER | EXPLOSIVES)",
     }
 ]}
 
