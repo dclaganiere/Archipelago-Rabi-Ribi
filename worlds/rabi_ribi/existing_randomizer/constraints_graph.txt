@@ -2631,6 +2631,12 @@ ITM & (
 "prereq": "NONE",
 }
 
+//Requires turning off v1.08 Hammer Roll
+{
+"edge": "LAB_ENTRANCE -> EVERNIGHT_LOWER",
+"prereq": "OBS_EXT & SLIDE_JUMP_BUNSTRIKE & AIR_JUMP & (BUNNY_AMULET | RABI_SLIPPERS) & AIR_DASH",
+}
+
 {
 "edge": "LAB_MID -> LAB_ENTRANCE",
 "prereq": "DOWNDRILL_SEMISOLID_CLIP",
