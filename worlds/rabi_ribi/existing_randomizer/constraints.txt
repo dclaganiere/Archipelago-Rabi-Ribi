@@ -1613,6 +1613,7 @@
         ((ADV_VHARD | AIR_JUMP) & (
             AIR_DASH_LV3 | (ITM_HARD & BUNNY_STRIKE)
         ))
+        | (ITM_HARD & AIR_JUMP & AIR_DASH)
         | (ADV_VHARD & AIR_JUMP & (WALL_JUMP_LV2 | STUPID))
         | (ADV_STUPID & BUNNY_AMULET & AIR_DASH)
     )
