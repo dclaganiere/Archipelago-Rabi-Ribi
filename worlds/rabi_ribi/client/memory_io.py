@@ -1,12 +1,11 @@
 """
-This module defines a class RabiRibiMemoryIO, which attaches
-itself to an open Rabi Ribi process and reads/writes memory
-in realtime. This is used to:
- - Recognize when a player gets an item
- - Write items to the player's inventory
- - Handle in game flags when a player recieves an AP item.
+This module handles reads and writes to Rabi-Ribi's memory
+in real time. This is used to:
+ - Recognize when a player gets an item.
+ - Write items to the player's inventory.
+ - Handle in-game flags when a player recieves an AP item.
  - Modify map data loaded into memory.
- - etc... 
+ - etc...
 """
 import asyncio
 import struct
@@ -15,6 +14,7 @@ from pymem import pymem
 
 from CommonClient import logger
 
+MODULE_SIZE = int(0x18DA000)
 OFFSET_AREA_ID = int(0x00DDBFA0)
 OFFSET_PLAYER_X = int(0x010736C8)
 OFFSET_PLAYER_Y = int(0x013EEF00)
@@ -63,23 +63,33 @@ class RabiRibiMemoryIO():
         try:
             self._read_int(OFFSET_AREA_ID)
         except pymem.exception.ProcessError:
-            logger.info("Lost connection with rabi ribi game.")
+            logger.info("Lost connection with Rabi-Ribi process.")
             self.rr_process_id = None
             self.rr_mem = None
             return False
         return True
 
     async def connect(self, exit_event: asyncio.Event):
-        logger.info("Waiting for connection to Rabi Ribi game instance...")
+        logger.info("Waiting for connection to Rabi-Ribi process...")
         while not exit_event.is_set():
             try:
                 self.rr_mem = pymem.Pymem("rabiribi.exe")
+
+                modules = list(self.rr_mem.list_modules())
+                main_module = modules[0]
+
+                if main_module.SizeOfImage != MODULE_SIZE:
+                    logger.error("Your Rabi-Ribi version is out of date. Please update Rabi-Ribi to the January 2026 version.")
+                    raise pymem.exception.ProcessError("rabiribi.exe")
+
                 self.rr_process_id = self.rr_mem.process_id
                 self.allocate()
-                logger.info("Successfully connected to Rabi Ribi Game.")
+                logger.info("Successfully connected to Rabi-Ribi process.")
                 return
             except pymem.exception.ProcessNotFound:
                 await asyncio.sleep(3)
+            except pymem.exception.ProcessError:
+                await asyncio.sleep(10)
 
     def allocate(self):
         self.addr_injected_give_item_entrypoint = self.rr_mem.allocate(12)
@@ -91,7 +101,6 @@ class RabiRibiMemoryIO():
         :int offset: the offset to read data from.
         :returns: The data represented as a byte string
         """
-        
         data = self.rr_mem.read_bytes(self.rr_mem.base_address + offset, 4)
         return data
     

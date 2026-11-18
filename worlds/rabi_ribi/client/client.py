@@ -83,7 +83,6 @@ class RabiRibiCommandProcessor(TrackerCommandProcessor): # type: ignore
         logger.info(f"Deathlink is now {'enabled' if self.ctx.death_link_enabled else 'disabled'}")
 
 class RabiRibiContext(TrackerGameContext): # type: ignore
-    """Rabi Ribi Game Context"""
     game = GAME_NAME
     tags = {"AP"}
 
@@ -211,7 +210,7 @@ class RabiRibiContext(TrackerGameContext): # type: ignore
         if self.client_recieved_initial_server_data():
             return
 
-        logger.info("Waiting for connect from server...")
+        logger.info("Waiting for connection to server...")
         while not self.client_recieved_initial_server_data() and not self.exit_event.is_set():
             await asyncio.sleep(1)
         if not self.exit_event.is_set():
@@ -586,10 +585,10 @@ class RabiRibiContext(TrackerGameContext): # type: ignore
 
 async def rabi_ribi_watcher(ctx: RabiRibiContext):
     """
-    Client loop, watching the rabi ribi game process.
+    Watches the Rabi-Ribi process.
     Handles game hook attachments, checking locations, giving items, etc.
 
-    :RabiRibiContext ctx: The Rabi Ribi Client context instance.
+    :RabiRibiContext ctx: The Rabi-Ribi client context instance.
     """
     watch_menu_task = None
     await ctx.wait_for_initial_connection_info()
@@ -599,7 +598,6 @@ async def rabi_ribi_watcher(ctx: RabiRibiContext):
             ctx.reset_client_state()
             await ctx.wait_for_initial_connection_info()
         if not ctx.rr_interface.is_connected():
-            logger.info("Waiting for connection to Rabi Ribi")
             await ctx.rr_interface.connect(ctx.exit_event)
             watch_menu_task = asyncio.create_task(ctx.watch_for_menus())
         try:
@@ -689,11 +687,10 @@ async def rabi_ribi_watcher(ctx: RabiRibiContext):
 
 async def check_for_locations(ctx: RabiRibiContext):
     """
-    This method checks if the player coordinates overlaps with any location checks.
-    If it is, it will update the locations_checked set to include the location
-    (if it's not already included).
+    Checks if the player's coordinates overlap with any locations.
+    If they do, marks the location as checked.
 
-    :RabiRibiContext ctx: The Rabi Ribi Client context instance.
+    :RabiRibiContext ctx: The Rabi-Ribi client context instance.
     """
     # Game paused or just got item
     if ctx.rr_interface.is_in_item_receive_animation():
