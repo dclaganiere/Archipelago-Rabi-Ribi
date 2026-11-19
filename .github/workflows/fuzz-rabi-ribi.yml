@@ -10,7 +10,7 @@ env:
   ap-version: 'latest'
   python-version: '3.13'
   apworld-path: worlds/rabi_ribi
-  fuzzer-commit: f027bf2ebf8ceae5da75232112039e6f26da3e85
+  fuzzer-commit: a12623c33ad110818111b36aab47839573aadbbe
   runs: 1000
   yamls-per-run: 1
   meta: "${{github.workspace}}/meta/fuzz_rabi_ribi.yaml"
